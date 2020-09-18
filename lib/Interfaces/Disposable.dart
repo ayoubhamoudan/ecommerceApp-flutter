@@ -1,0 +1,5 @@
+class Disposable {
+
+  void dispose (){}
+
+}
