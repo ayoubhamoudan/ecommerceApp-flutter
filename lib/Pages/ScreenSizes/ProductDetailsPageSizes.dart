@@ -32,7 +32,7 @@ class ProductDetailsPageSizes {
         this.DescriptionFontSize = 16 ;
         this.ButtonHeight = 47 ;
         this.AddToCartFontSize = 17 ;
-        this.IconSize = 25 ;
+        this.IconSize = 23 ;
         break ;
       case ScreenTypes.MEDIUM :
         this.BrandFontSize = 23;

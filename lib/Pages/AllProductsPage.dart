@@ -114,14 +114,6 @@ class _AllProductsPageState extends State<AllProductsPage> {
                     actions: <Widget>[
                       IconButton(
                         icon: Icon(
-                          CustomIcons.search,
-                          size: 22,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(
                           CustomIcons.bag,
                           size: 25,
                           color: Colors.black,

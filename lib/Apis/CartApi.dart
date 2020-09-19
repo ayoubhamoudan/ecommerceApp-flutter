@@ -4,7 +4,7 @@ import 'ApiUrls.dart';
 
 class CartApi {
   Dio dio = Dio();
-  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMWFkYzQ5ZTc1NmJiMjIwMDkxYzM5OSIsImlhdCI6MTU5ODAyMTk5OCwiZXhwIjoxNTk4ODg1OTk4fQ.irAAWeR2P2aERAcECBh1dnzcsV5AxNhMb9W0IMZEzMY" ;
+  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMWFkYzQ5ZTc1NmJiMjIwMDkxYzM5OSIsImlhdCI6MTYwMDQ4MzQ2MywiZXhwIjoxNjAxMzQ3NDYzfQ.E0VL8l5i2icqBxTL22urrQ41Iu09oIhto544m7AOWRQ" ;
 
   Future addToCart(String productId , String size , int quantity) async {
     Map <String , dynamic> body = {

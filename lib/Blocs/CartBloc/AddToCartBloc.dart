@@ -14,7 +14,8 @@ class AddToCartBloc {
 
 
   BehaviorSubject <String> _productIdController = BehaviorSubject<String>();
-  StreamSink <String> get addProductId => _productIdController.sink ;
+  Function (String) get addProductId => _productIdController.sink.add ;
+
 
   BehaviorSubject <int> _quantityController = BehaviorSubject <int> ();
   Stream <int> get quantityStream => _quantityController.stream ;
@@ -43,7 +44,7 @@ class AddToCartBloc {
   }
 
   void _decreaseQuantity  (int quantity){
-    if (quantity > 0){
+    if (quantity > 1){
       quantity -- ;
     }
     addQuantity.add(quantity);
@@ -51,6 +52,7 @@ class AddToCartBloc {
 
   addToCart (){
     String productId = _productIdController.value ;
+    print(productId);
     String size = _sizeController.value ;
     int quantity = _quantityController.value ;
     cartApi.addToCart(productId, size , quantity);
