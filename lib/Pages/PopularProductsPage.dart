@@ -2,12 +2,11 @@ import 'package:ecommerceapp/Blocs/ProductsBloc/PopularProductsBloc.dart';
 import 'package:ecommerceapp/Components/AppbarComponent.dart';
 import 'package:ecommerceapp/Components/PageTitleComponents.dart';
 import 'package:ecommerceapp/Components/ProductsGridList.dart';
-import 'package:ecommerceapp/Pages/ScreenSizes/PopularProductsPageSizes.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
 
-import 'ScreenSizes/HomePageSizes.dart';
+import 'PagesSizes/PopularProductsPageSizes.dart';
 
 class PopularProductsPage extends StatefulWidget {
   @override

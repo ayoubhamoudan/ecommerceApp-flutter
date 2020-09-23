@@ -1,20 +1,24 @@
+
+
 import 'package:ecommerceapp/Apis/CollectionsApi.dart';
 import 'package:ecommerceapp/Blocs/CollectionsBloc/CollectionProductsBloc.dart';
 import 'package:ecommerceapp/Models/Collection.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'CollectionProductsPage.dart';
 
-class AllCollectionsPage extends StatefulWidget {
+
+class CollectionsPage extends StatefulWidget {
   @override
-  _AllCollectionsPageState createState() => _AllCollectionsPageState();
+  _CollectionsPageState createState() => _CollectionsPageState();
 }
 
-class _AllCollectionsPageState extends State<AllCollectionsPage> {
+class _CollectionsPageState extends State<CollectionsPage> {
+  CollectionProductsBloc collectionProductsBloc = Get.put(CollectionProductsBloc());
   CollectionApi collectionApi = CollectionApi();
-  CollectionProductsBloc collectionProductsBloc = CollectionProductsBloc();
+
 
   @override
   void dispose() {
@@ -24,26 +28,26 @@ class _AllCollectionsPageState extends State<AllCollectionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    Scaffold(
+    return Scaffold(
       body: FutureBuilder(
-        future: null,
-        builder: (context , snapshot){
-          switch (snapshot.connectionState){
+        future: collectionApi.getAllCollections(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
             case ConnectionState.none:
-             return noConnectionWidget();
+              return noConnectionWidget();
               break;
             case ConnectionState.waiting:
             case ConnectionState.active:
               return loadingWidget();
               break;
             case ConnectionState.done:
-              if (snapshot.hasError){
+              if (snapshot.hasError) {
                 return errorWidget(snapshot.error);
               } else {
-                if (!snapshot.hasData){
+                if (!snapshot.hasData) {
                   return noDataWidget();
                 } else {
-                  return _screen(snapshot.data, context);
+                  return _screen(snapshot.data , context);
                 }
               }
               break;
@@ -54,14 +58,14 @@ class _AllCollectionsPageState extends State<AllCollectionsPage> {
     );
   }
 
-  Widget _screen(List<Collection> collections, BuildContext context) {
+  Widget _screen(List<Collection> collections , BuildContext context) {
     return PageView.builder(
       itemBuilder: (context, index) {
         return Stack(
           children: <Widget>[
             _background(collections, index),
             _backgroundLayer(),
-            _items(collections, index, context)
+            _items(collections, index , context)
           ],
         );
       },
@@ -129,20 +133,20 @@ class _AllCollectionsPageState extends State<AllCollectionsPage> {
             height: MediaQuery.of(context).size.height * 0.1,
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width * 0.4 ,
             height: MediaQuery.of(context).size.height * 0.06,
             child: RaisedButton(
               child: Text(
                 'Discover',
                 style: GoogleFonts.poppins(
-                    fontSize: 17, fontWeight: FontWeight.w500),
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500
+                ),
               ),
-              onPressed: () {
+              onPressed: (){
+                print('Im Clicked');
                 collectionProductsBloc.addCollection.add(collections[index].id);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CollectionProductsPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionProductsPage(collections[index])));
               },
               color: Colors.white,
               elevation: 0,

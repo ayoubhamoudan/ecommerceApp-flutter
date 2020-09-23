@@ -6,12 +6,12 @@ import 'package:ecommerceapp/Components/DrawerComponent.dart';
 import 'package:ecommerceapp/Components/ProductsGridList.dart';
 import 'package:ecommerceapp/Components/ProductsHorizontalList.dart';
 import 'package:ecommerceapp/Pages/AllProductsPage.dart';
-import 'package:ecommerceapp/Pages/ScreenSizes/HomePageSizes.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'PagesSizes/HomePageSizes.dart';
 import 'PopularProductsPage.dart';
 
 class HomePage extends StatefulWidget {

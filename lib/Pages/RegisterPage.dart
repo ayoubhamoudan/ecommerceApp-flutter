@@ -1,9 +1,9 @@
 import 'package:ecommerceapp/Blocs/AuthBlocs/RegisterBloc.dart';
-import 'ScreenSizes/AuthPages/RegisterPageSizes.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'LoginPage.dart';
+import 'PagesSizes/AuthPages/RegisterPageSizes.dart';
 
 class RegisterPage extends StatefulWidget {
   @override

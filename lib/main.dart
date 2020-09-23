@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:ecommerceapp/Pages/AllCollectionsPage.dart';
 import 'package:ecommerceapp/Pages/LoginPage.dart';
 import 'package:ecommerceapp/pages/WelcomePage.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,10 @@ main () async{
     firstPage = WelcomePage();
   }
   runApp(
-    DevicePreview(
-      builder: (context) => Fasho(firstPage)
-    ),
-//    Fasho(firstPage)
+//    DevicePreview(
+//      builder: (context) => Fasho(firstPage)
+//    ),
+    Fasho(firstPage)
   );
 }
 
@@ -32,7 +33,7 @@ class Fasho extends StatelessWidget {
     return MaterialApp(
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: this.firstPage,
+      home: CollectionsPage(),
       theme: ThemeData(
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.white,

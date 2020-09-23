@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/Blocs/AuthBlocs/LoginBloc.dart';
-import 'ScreenSizes/AuthPages/LoginPageSizes.dart';
+import 'PagesSizes/AuthPages/LoginPageSizes.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

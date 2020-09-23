@@ -2,12 +2,13 @@ import 'package:ecommerceapp/Apis/CategoriesApi.dart';
 import 'package:ecommerceapp/Blocs/ProductsBloc/ProductsByCategoryBloc.dart';
 import 'package:ecommerceapp/Components/ProductsGridList.dart';
 import 'package:ecommerceapp/Models/Category.dart';
-import 'package:ecommerceapp/Pages/ScreenSizes/AllProductsPageSizes.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:ecommerceapp/app_assets/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'PagesSizes/AllProductsPageSizes.dart';
 
 class AllProductsPage extends StatefulWidget {
   @override

@@ -5,13 +5,14 @@ import 'package:ecommerceapp/Blocs/ProductsBloc/SimilarProductsBloc.dart';
 import 'package:ecommerceapp/Components/AddToCartModal.dart';
 import 'package:ecommerceapp/Components/ProductsHorizontalList.dart';
 import 'package:ecommerceapp/Models/Product.dart';
-import 'package:ecommerceapp/Pages/ScreenSizes/ProductDetailsPageSizes.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:ecommerceapp/app_assets/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'PagesSizes/ProductDetailsPageSizes.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final Product product;
