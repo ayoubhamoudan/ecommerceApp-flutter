@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  _errorMessage(),
                   _drawSizedBox(height * 0.03),
                   _title(loginPageSizes.TitleFontSize),
                   _drawSizedBox(height * 0.04),
@@ -145,7 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                 'Log In',
                 style: TextStyle(color: Colors.white, fontSize: fontSize),
               ),
-              onPressed: !snapshot.hasData ? null : (){} ,
+              onPressed: !snapshot.hasData ? null : (){
+                loginBloc.logIn();
+              } ,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(6))),
             ),
@@ -186,6 +189,35 @@ class _LoginPageState extends State<LoginPage> {
   Widget _drawSizedBox(double boxHeight) {
     return SizedBox(
       height: boxHeight,
+    );
+  }
+
+
+
+  Widget _errorMessage (){
+    return StreamBuilder(
+      stream:  loginBloc.errorStream,
+      builder: (context , snapshot){
+        if (snapshot.hasError){
+          return Padding(
+            padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              color:Color(0xFFe15f41),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text(snapshot.error, style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    color: Colors.white
+                  ),),
+                ),
+              ),
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 }

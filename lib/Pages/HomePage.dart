@@ -1,6 +1,8 @@
 import 'package:ecommerceapp/Apis/CollectionsApi.dart';
 import 'package:ecommerceapp/Blocs/ProductsBloc/AllProductsBloc.dart';
 import 'package:ecommerceapp/Blocs/ProductsBloc/PopularProductsBloc.dart';
+import 'package:ecommerceapp/Components/AppbarComponent.dart';
+import 'package:ecommerceapp/Components/DrawerComponent.dart';
 import 'package:ecommerceapp/Components/ProductsGridList.dart';
 import 'package:ecommerceapp/Components/ProductsHorizontalList.dart';
 import 'package:ecommerceapp/Pages/AllProductsPage.dart';
@@ -36,15 +38,15 @@ class _HomePageState extends State<HomePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Text('Home Page'),
-      ),
+      drawer: DrawerComponent(),
+      appBar: AppBarComponent(context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: height * 0.03,
+            ),
             _collectionSlider(
               homePageSizes.SliderTextFontSize,
               homePageSizes.ButtonTextFontSize,

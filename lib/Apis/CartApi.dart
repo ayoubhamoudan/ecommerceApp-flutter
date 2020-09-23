@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerceapp/Exceptions/resource_not_found.dart';
 
 import 'ApiUrls.dart';
 
@@ -20,7 +21,20 @@ class CartApi {
       ));
     }
     catch (err){
+      throw ResourceNotFoundException();
+    }
+  }
 
+  Future getCard () async {
+    try {
+      Response response =  await dio.get(ApiUrls.add_to_cart_url  , options: Options(
+          headers: {
+            'Authorization' : "Bearer " + token ,
+          }
+      ));
+    }
+    catch (err){
+      throw ResourceNotFoundException();
     }
   }
 }

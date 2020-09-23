@@ -17,7 +17,7 @@ main () async{
     DevicePreview(
       builder: (context) => Fasho(firstPage)
     ),
-    // Fasho(firstPage)
+//    Fasho(firstPage)
   );
 }
 
@@ -35,7 +35,7 @@ class Fasho extends StatelessWidget {
       home: this.firstPage,
       theme: ThemeData(
         primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.white
+        scaffoldBackgroundColor: Colors.white,
       ),
     );
   }

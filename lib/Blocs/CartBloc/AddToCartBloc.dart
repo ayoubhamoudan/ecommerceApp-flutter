@@ -52,7 +52,6 @@ class AddToCartBloc {
 
   addToCart (){
     String productId = _productIdController.value ;
-    print(productId);
     String size = _sizeController.value ;
     int quantity = _quantityController.value ;
     cartApi.addToCart(productId, size , quantity);

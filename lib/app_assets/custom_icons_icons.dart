@@ -25,4 +25,5 @@ class CustomIcons {
   static const IconData black_heart = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData search = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

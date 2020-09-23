@@ -21,7 +21,6 @@ class ProductsApi{
         throw RedirectionFoundException();
       case 200:
         var data = response.data['data'];
-
         List<Product> products = [];
         for (var item in data){
           products.add(Product.fromJson(item));
