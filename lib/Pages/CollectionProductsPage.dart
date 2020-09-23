@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/Blocs/CollectionsBloc/CollectionProductsBloc.dart';
 import 'package:ecommerceapp/Components/AppbarComponent.dart';
+import 'package:ecommerceapp/Components/DrawerComponent.dart';
 import 'package:ecommerceapp/Components/PageTitleComponents.dart';
 import 'package:ecommerceapp/Components/ProductsGridList.dart';
 import 'package:ecommerceapp/Models/Collection.dart';
@@ -32,6 +33,7 @@ class _CollectionProductsPageState extends State<CollectionProductsPage> {
     ScreenConfig screenConfig = ScreenConfig(context);
     CollectionProductsPageSizes collectionProductsPageSizes = CollectionProductsPageSizes(screenConfig);
     return Scaffold(
+      drawer: DrawerComponent(),
       appBar: AppBarComponent(context),
       body: SafeArea(
         child: SingleChildScrollView(

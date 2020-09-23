@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/Blocs/ProductsBloc/PopularProductsBloc.dart';
 import 'package:ecommerceapp/Components/AppbarComponent.dart';
+import 'package:ecommerceapp/Components/DrawerComponent.dart';
 import 'package:ecommerceapp/Components/PageTitleComponents.dart';
 import 'package:ecommerceapp/Components/ProductsGridList.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
@@ -27,7 +28,7 @@ class _PopularProductsPageState extends State<PopularProductsPage> {
     PopularProductsPageSizes popularProductsPageSizes =
         PopularProductsPageSizes(screenConfig);
     return Scaffold(
-      drawer: Drawer(),
+      drawer: DrawerComponent(),
       appBar: AppBarComponent(context),
       body: SafeArea(
         child: SingleChildScrollView(

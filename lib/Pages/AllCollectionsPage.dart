@@ -3,7 +3,9 @@
 import 'package:ecommerceapp/Apis/CollectionsApi.dart';
 import 'package:ecommerceapp/Blocs/CollectionsBloc/CollectionProductsBloc.dart';
 import 'package:ecommerceapp/Models/Collection.dart';
+import 'package:ecommerceapp/Pages/PagesSizes/AllCollectionsPageSizes.dart';
 import 'package:ecommerceapp/Utils/HelperWidgets.dart';
+import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -95,6 +97,8 @@ class _CollectionsPageState extends State<CollectionsPage> {
   }
 
   Widget _items(List<Collection> collections, index, BuildContext context) {
+    ScreenConfig screenConfig = ScreenConfig(context);
+    AllCollectionsPageSizes allCollectionsPageSizes = AllCollectionsPageSizes(screenConfig);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +112,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
               collections[index].name,
               style: GoogleFonts.shadowsIntoLight(
                 textStyle: TextStyle(
-                  fontSize: 66,
+                  fontSize: allCollectionsPageSizes.NameFontSize,
                   color: Colors.white,
                 ),
               ),
@@ -124,7 +128,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
               collections[index].description,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                fontSize: 19,
+                fontSize: allCollectionsPageSizes.DescriptionFontSize,
                 color: Colors.white,
               ),
             ),
@@ -139,12 +143,11 @@ class _CollectionsPageState extends State<CollectionsPage> {
               child: Text(
                 'Discover',
                 style: GoogleFonts.poppins(
-                    fontSize: 17,
+                    fontSize: allCollectionsPageSizes.ButtonTextFontSize,
                     fontWeight: FontWeight.w500
                 ),
               ),
               onPressed: (){
-                print('Im Clicked');
                 collectionProductsBloc.addCollection.add(collections[index].id);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionProductsPage(collections[index])));
               },

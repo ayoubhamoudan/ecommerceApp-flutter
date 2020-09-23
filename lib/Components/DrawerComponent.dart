@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/Components/ComponentsSizes/DrawerComponentSizes.dart';
+import 'package:ecommerceapp/Pages/AllCollectionsPage.dart';
 import 'package:ecommerceapp/Pages/HomePage.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class DrawerComponent extends StatefulWidget {
 class _DrawerComponentState extends State<DrawerComponent> {
   List<DrawerModel> drawerItems = [
     DrawerModel('home', () => HomePage()),
-    DrawerModel('collections', () => {}),
+    DrawerModel('collections', () => CollectionsPage()),
     DrawerModel('Cart', () => {}),
     DrawerModel('favourites', () => {}),
     DrawerModel('my orders', () => {}),
