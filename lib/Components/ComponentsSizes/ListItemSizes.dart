@@ -31,7 +31,11 @@ class ListItemSizes {
         this.TitleFontSize = 16 ;
         this.BrandFontSize = 20 ;
         this.PriceFontSize = 18;
-
+        break;
+      case ScreenTypes.XLARGE:
+        this.TitleFontSize = 16 ;
+        this.BrandFontSize = 20 ;
+        this.PriceFontSize = 18;
         break ;
     }
   }

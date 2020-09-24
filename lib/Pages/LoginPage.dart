@@ -1,4 +1,6 @@
 import 'package:ecommerceapp/Blocs/AuthBlocs/LoginBloc.dart';
+import 'package:ecommerceapp/Components/LoadingComponent.dart';
+import 'HomePage.dart';
 import 'PagesSizes/AuthPages/LoginPageSizes.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
@@ -22,38 +24,48 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder(
+        stream: loginBloc.isLoadingStream,
+        builder: (context, snapshot){
+         return snapshot.data == true ? LoadingComponent() : _loginScreen(context);
+        },
+      )
+    );
+  }
+
+
+  Widget _loginScreen (BuildContext context){
     ScreenConfig screenConfig = ScreenConfig(context);
     LoginPageSizes loginPageSizes = LoginPageSizes(screenConfig);
     double height = MediaQuery.of(context).size.height ;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _header(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _errorMessage(),
-                  _drawSizedBox(height * 0.03),
-                  _title(loginPageSizes.TitleFontSize),
-                  _drawSizedBox(height * 0.04),
-                  _emailInput(),
-                  _drawSizedBox(height * 0.03),
-                  _passwordInput(),
-                  _drawSizedBox(height * 0.012),
-                  _forgotPassword(loginPageSizes.ForgotPasswordFontSize),
-                  _drawSizedBox(height * 0.025),
-                  _loginButton(loginPageSizes.ButtonHeight, loginPageSizes.ButtonTextFontSize),
-                  _drawSizedBox(height * 0.02),
-                  _createAccountText(loginPageSizes.CreateAccountFontSize , loginPageSizes.RegisterFontSize)
-                ],
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          _header(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _errorMessage(),
+                _drawSizedBox(height * 0.03),
+                _title(loginPageSizes.TitleFontSize),
+                _drawSizedBox(height * 0.04),
+                _emailInput(),
+                _drawSizedBox(height * 0.03),
+                _passwordInput(),
+                _drawSizedBox(height * 0.012),
+                _forgotPassword(loginPageSizes.ForgotPasswordFontSize),
+                _drawSizedBox(height * 0.025),
+                _loginButton(loginPageSizes.ButtonHeight, loginPageSizes.ButtonTextFontSize),
+                _drawSizedBox(height * 0.02),
+                _createAccountText(loginPageSizes.CreateAccountFontSize , loginPageSizes.RegisterFontSize)
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -147,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(color: Colors.white, fontSize: fontSize),
               ),
               onPressed: !snapshot.hasData ? null : (){
-                loginBloc.logIn();
+                loginBloc.logIn(NavigatTo);
               } ,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(6))),
@@ -219,5 +231,9 @@ class _LoginPageState extends State<LoginPage> {
         return Container();
       },
     );
+  }
+
+  void NavigatTo (){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 }

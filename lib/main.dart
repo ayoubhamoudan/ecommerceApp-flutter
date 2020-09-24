@@ -15,10 +15,10 @@ main () async{
     firstPage = WelcomePage();
   }
   runApp(
-    DevicePreview(
-      builder: (context) => Fasho(firstPage)
-    ),
-//    Fasho(firstPage)
+//    DevicePreview(
+//      builder: (context) => Fasho(firstPage)
+//    ),
+    Fasho(firstPage)
   );
 }
 
@@ -33,7 +33,7 @@ class Fasho extends StatelessWidget {
     return MaterialApp(
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: this.firstPage,
+      home: LoginPage(),
       theme: ThemeData(
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.white,

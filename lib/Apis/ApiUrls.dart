@@ -2,6 +2,7 @@ class ApiUrls {
   static const String main_url = 'http://192.168.1.6:3000/api/' ;
   static const collections_url = main_url + 'collections' ;
   static const login_url = main_url + '/login';
+  static const register_url = main_url + '/register';
   static String single_collection_url (collectionId){
     return collections_url + '/' + collectionId ;
   }

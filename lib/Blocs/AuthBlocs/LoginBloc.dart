@@ -2,56 +2,73 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:ecommerceapp/Apis/AuthApi.dart';
 import 'package:ecommerceapp/Interfaces/Disposable.dart';
+import 'package:ecommerceapp/Pages/HomePage.dart';
 import 'package:ecommerceapp/Validations/AuthValidations.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-
 class LoginBloc implements Disposable {
-
   AuthApi authApi = AuthApi();
   AuthValidations authValidations = AuthValidations();
-  bool isAuth = false ;
-  bool loading ;
-  String error ;
-  String token ;
+  bool isAuth = false;
 
+  bool loading;
 
-  final BehaviorSubject<String> _emailController = BehaviorSubject <String> ();
-  Stream<String> get email => _emailController.stream.transform(authValidations.validateEmail);
-  Function (String) get changeEmail => _emailController.sink.add;
+  String error;
 
-  final BehaviorSubject<String> _passwordController = BehaviorSubject <String> ();
-  Stream <String> get password => _passwordController.stream.transform(authValidations.validatePassword) ;
-  Function(String) get changePassword => _passwordController.sink.add ;
+  String token;
 
-  Stream <bool> get isValid => Rx.combineLatest2(email, password, (email , password) => true);
+  final BehaviorSubject<String> _emailController = BehaviorSubject<String>();
 
+  Stream<String> get email =>
+      _emailController.stream.transform(authValidations.validateEmail);
 
-  final StreamController <String> _errorController = StreamController<String>();
-  Stream <String> get errorStream => _errorController.stream ;
+  Function(String) get changeEmail => _emailController.sink.add;
 
-  final StreamController <bool> _isLoadingController = StreamController<bool>();
-  Stream <bool> get isLoadingStream => _isLoadingController.stream ;
+  final BehaviorSubject<String> _passwordController = BehaviorSubject<String>();
 
-  final StreamController <bool> _isAuthController =  StreamController<bool>();
-  Stream <bool> get isAuthStream => _isAuthController.stream ;
+  Stream<String> get password =>
+      _passwordController.stream.transform(authValidations.validatePassword);
 
-  Future logIn () async {
-      String email = _emailController.value ;
-      String password = _passwordController.value;
-      try {
-        var response = await authApi.login(email , password);
-        this.token = response.data['token'] ;
+  Function(String) get changePassword => _passwordController.sink.add;
 
-      } catch (err){
-        this.error = err.response.data['error'];
-        _errorController.sink.addError(this.error);
-      }
+  Stream<bool> get isValid =>
+      Rx.combineLatest2(email, password, (email, password) => true);
+
+  final BehaviorSubject<String> _errorController = BehaviorSubject<String>();
+
+  Stream<String> get errorStream => _errorController.stream;
+
+  final BehaviorSubject<bool> _isLoadingController = BehaviorSubject<bool>();
+
+  Stream<bool> get isLoadingStream => _isLoadingController.stream;
+
+  final StreamController<bool> _isAuthController = StreamController<bool>();
+
+  Stream<bool> get isAuthStream => _isAuthController.stream;
+
+  LoginBloc() {
+    this.loading = false;
+    _isLoadingController.add(this.loading);
   }
 
-  void logOut (){
-
+  Future logIn(Function NavigateTo) async {
+    String email = _emailController.value;
+    String password = _passwordController.value;
+    _isLoadingController.add(true);
+    var response = await authApi.login(email, password);
+    if (response['success']) {
+      NavigateTo();
+      _errorController.value = null ;
+    } else {
+      this.error = response['error'];
+      _errorController.sink.addError(this.error);
+      _isLoadingController.add(false);
+    }
   }
+
+  void logOut() {}
 
   @override
   void dispose() {
@@ -61,5 +78,4 @@ class LoginBloc implements Disposable {
     _isAuthController.close();
     _isLoadingController.close();
   }
-
 }

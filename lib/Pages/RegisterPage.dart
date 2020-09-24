@@ -1,7 +1,9 @@
 import 'package:ecommerceapp/Blocs/AuthBlocs/RegisterBloc.dart';
+import 'package:ecommerceapp/Components/LoadingComponent.dart';
 import 'package:ecommerceapp/Utils/ScreenConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'HomePage.dart';
 import 'LoginPage.dart';
 import 'PagesSizes/AuthPages/RegisterPageSizes.dart';
 
@@ -21,37 +23,46 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder(
+        stream: registerBloc.isLoadingStream,
+        builder: (context, snapshot){
+          return snapshot.data == true ? LoadingComponent() : _registerPage(context);
+        },
+      )
+    );
+  }
+
+
+  Widget _registerPage (BuildContext context){
     ScreenConfig screenConfig = ScreenConfig(context);
     RegisterPageSizes registerPageSizes = RegisterPageSizes(screenConfig);
     double height = MediaQuery.of(context).size.height ;
-    double width = MediaQuery.of(context).size.width ;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: registerPageSizes.ColumnPadding , vertical: 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _drawSizedBox(height * 0.2),
-              _title(registerPageSizes.TitleFontSize),
-              _drawSizedBox(height * 0.05),
-              _nameInput(),
-              _drawSizedBox(height * 0.04),
-              _emailInput(),
-              _drawSizedBox(height * 0.04),
-              _passwordInput(),
-              _drawSizedBox(height * 0.07),
-              _registerButton(registerPageSizes.ButtonHeight , registerPageSizes.ButtonTextFontSize),
-              _drawSizedBox(height * 0.05),
-              _loginText(registerPageSizes.AlreadyHaveAccountFontSize, registerPageSizes.LoginFontSize)
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: registerPageSizes.ColumnPadding , vertical: 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _drawSizedBox(height * 0.2),
+            _title(registerPageSizes.TitleFontSize),
+            _errorMessage(),
+            _drawSizedBox(height * 0.05),
+            _nameInput(),
+            _drawSizedBox(height * 0.04),
+            _emailInput(),
+            _drawSizedBox(height * 0.04),
+            _passwordInput(),
+            _drawSizedBox(height * 0.07),
+            _registerButton(registerPageSizes.ButtonHeight , registerPageSizes.ButtonTextFontSize),
+            _drawSizedBox(height * 0.05),
+            _loginText(registerPageSizes.AlreadyHaveAccountFontSize, registerPageSizes.LoginFontSize)
+          ],
         ),
       ),
     );
   }
-
 
   Widget _title(double fontSize) {
     return Text(
@@ -120,7 +131,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 'Register',
                 style: TextStyle(color: Colors.white, fontSize: fontSize),
               ),
-              onPressed: !snapshot.hasData ? null : () {},
+              onPressed: !snapshot.hasData ? null : (){
+                registerBloc.register(NavigatTo);
+              } ,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(6))),
             ),
@@ -155,5 +168,37 @@ class _RegisterPageState extends State<RegisterPage> {
     return SizedBox(
       height: boxHeight,
     );
+  }
+
+  Widget _errorMessage (){
+    return StreamBuilder(
+      stream:  registerBloc.errorStream,
+      builder: (context , snapshot){
+        if (snapshot.hasError){
+          return Padding(
+            padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              color:Color(0xFFe15f41),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text(snapshot.error, style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: Colors.white
+                  ),),
+                ),
+              ),
+            ),
+          );
+        }
+        return Container();
+      },
+    );
+  }
+
+
+  void NavigatTo (){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 }
