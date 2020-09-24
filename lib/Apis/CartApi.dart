@@ -28,6 +28,8 @@ class CartApi {
   }
 
   Future getCard () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =  prefs.get('token');
     try {
       Response response =  await dio.get(ApiUrls.add_to_cart_url  , options: Options(
           headers: {
