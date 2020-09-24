@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerceapp/Exceptions/resource_not_found.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ApiUrls.dart';
 
 class CartApi {
   Dio dio = Dio();
-  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMWFkYzQ5ZTc1NmJiMjIwMDkxYzM5OSIsImlhdCI6MTYwMDQ4MzQ2MywiZXhwIjoxNjAxMzQ3NDYzfQ.E0VL8l5i2icqBxTL22urrQ41Iu09oIhto544m7AOWRQ" ;
 
   Future addToCart(String productId , String size , int quantity) async {
     Map <String , dynamic> body = {
@@ -13,6 +13,8 @@ class CartApi {
       'quantity' : quantity,
       'size' : size,
     };
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =  prefs.get('token');
     try {
       await dio.post(ApiUrls.add_to_cart_url , data: body , options: Options(
           headers: {
