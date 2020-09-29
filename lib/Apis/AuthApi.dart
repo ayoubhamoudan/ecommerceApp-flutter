@@ -13,7 +13,7 @@ class AuthApi {
      try {
        var response = await dio.post(ApiUrls.login_url, data: body);
        String token = response.data['token'] ;
-       await setToken(token);
+       await _setToken(token);
        return response.data ;
      } catch (err){
        return err.response.data ;
@@ -29,7 +29,7 @@ class AuthApi {
     try {
       var response = await dio.post(ApiUrls.register_url, data: body);
       String token = response.data['token'] ;
-      await setToken(token);
+      await _setToken(token);
       return response.data ;
     } catch (err){
       return err.response.data ;
@@ -37,7 +37,7 @@ class AuthApi {
   }
 
 
-  void setToken (String token) async{
+  void _setToken (String token) async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
    prefs.setString('token', token);
   }

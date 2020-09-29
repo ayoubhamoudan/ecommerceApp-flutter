@@ -1,23 +1,22 @@
-import 'package:ecommerceapp/Models/Product.dart';
+import 'Product.dart';
 
 class Cart {
-  List <Product> products ;
-  double totalPrice ;
   int totalQuantity ;
-
-  Cart(this.products, this.totalPrice, this.totalQuantity);
+  int totalPrice;
+  List  products ;
+  Cart(this.totalQuantity , this.totalPrice, this.products);
 
   Cart.fromJson(Map<String , dynamic> jsonObject){
-    _setProducts(jsonObject['items']);
     this.totalPrice = jsonObject['totalPrice'];
     this.totalQuantity = jsonObject['totalQuantity'];
+    _setProducts(jsonObject['items']);
   }
 
-  _setProducts (List<Product> jsonProducts){
-    List <Product> products = [] ;
-    for (Product product in jsonProducts){
-      products.add(product);
+  _setProducts (List<dynamic> jsonProducts){
+    this.products = [] ;
+    for (var item in jsonProducts){
+      var product = item['product'];
+      this.products.add(Product.fromJson(product));
     }
   }
 }
-

@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:ecommerceapp/Pages/AllCollectionsPage.dart';
+import 'package:ecommerceapp/Pages/CartPage.dart';
 import 'package:ecommerceapp/Pages/LoginPage.dart';
 import 'package:ecommerceapp/pages/WelcomePage.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class Fasho extends StatelessWidget {
     return MaterialApp(
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: this.firstPage,
       theme: ThemeData(
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.white,

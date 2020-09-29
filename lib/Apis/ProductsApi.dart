@@ -9,7 +9,7 @@ import 'ApiUrls.dart';
 class ProductsApi{
   Dio dio = Dio();
 
-  Future getAllProducts() async {
+  Future getAllProducts({String title}) async {
     Response response = await dio.get(ApiUrls.products_url);
     switch(response.statusCode){
       case 404:
@@ -25,6 +25,7 @@ class ProductsApi{
         for (var item in data){
           products.add(Product.fromJson(item));
         }
+        print(products);
         return products;
     }
     return null ;

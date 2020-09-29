@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerceapp/Exceptions/resource_not_found.dart';
+import 'package:ecommerceapp/Models/Cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ApiUrls.dart';
@@ -27,18 +28,19 @@ class CartApi {
     }
   }
 
-  Future getCard () async {
+  Future getCart () async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token =  prefs.get('token');
     try {
-      Response response =  await dio.get(ApiUrls.add_to_cart_url  , options: Options(
+      Response response =  await dio.get(ApiUrls.cart_url  , options: Options(
           headers: {
             'Authorization' : "Bearer " + token ,
           }
       ));
+      var cart = response.data['data']['cart'];
+      return(Cart.fromJson(cart));
     }
     catch (err){
-      throw ResourceNotFoundException();
     }
   }
 }
